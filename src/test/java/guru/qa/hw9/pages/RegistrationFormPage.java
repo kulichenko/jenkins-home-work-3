@@ -2,6 +2,7 @@ package guru.qa.hw9.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -44,41 +45,49 @@ public class RegistrationFormPage {
     private SelenideElement modalHeader = $(".modal-header");
     private ElementsCollection tableRows = $("tbody").$$("tr");
 
+    @Step("Проверка загрузки страницы с регистрационной формой")
     public RegistrationFormPage checkThatPageIsLoaded() {
         formTitle.shouldHave(text("Student Registration Form"));
         return this;
     }
 
+    @Step("Ввод имени")
     public RegistrationFormPage typeFirstName(String name) {
         firstNameInput.setValue(name);
         return this;
     }
 
+    @Step("Ввод фамилии")
     public RegistrationFormPage typeLastName(String lastname) {
         lastNameInput.setValue(lastname);
         return this;
     }
 
+    @Step("Ввод e-mail")
     public RegistrationFormPage typeUserEmail(String email) {
         userEmail.setValue(email);
         return this;
     }
 
+    @Step("Выбор пола: Мужской")
     public RegistrationFormPage setMaleRadio() {
         genderMaleRadio.click();
         return this;
     }
 
+    @Step("Выбор пола: Женский")
     public RegistrationFormPage setFemaleRadio() {
         genderFemaleRadio.click();
         return this;
     }
 
+    @Step("Ввод телефона")
     public RegistrationFormPage typeUserPhoneNo(String phoneNo) {
         userNumberInput.setValue(phoneNo);
         return this;
     }
 
+    @Step("Ввод даты рождения {day}/{month}/{year}")
     public RegistrationFormPage setBirthDate(String day, String month, String year) {
         dateOfBirthInput.click();
         monthSelect.selectOption(month);
@@ -87,6 +96,7 @@ public class RegistrationFormPage {
         return this;
     }
 
+    @Step("Ввод предметов {subjects}")
     public RegistrationFormPage setSubjects(String... subjects) {
         Arrays.stream(subjects).forEach(subject -> {
             subjectsInput.setValue(subject).pressEnter();
@@ -94,6 +104,7 @@ public class RegistrationFormPage {
         return this;
     }
 
+    @Step("Ввод хобби {hobbies}")
     public RegistrationFormPage setHobbies(String... hobbies) {
         Arrays.stream(hobbies).forEach(hobby -> {
             $("#hobbiesWrapper").$(byText(hobby)).click();
@@ -101,38 +112,45 @@ public class RegistrationFormPage {
         return this;
     }
 
+    @Step("Загрузка фото")
     public RegistrationFormPage uploadPicture(String path) {
         uploadPicture.uploadFromClasspath(path);
         return this;
     }
 
+    @Step("Ввод адреса {address}")
     public RegistrationFormPage typeAddress(String address) {
         currentAddressTextArea.setValue(address);
         return this;
     }
 
+    @Step("Выбор штата")
     public RegistrationFormPage selectState(String stateName) {
         state.click();
         stateDropDownList.setValue(stateName).pressEnter();
         return this;
     }
 
+    @Step("Выбор города")
     public RegistrationFormPage selectCity(String cityName) {
         city.click();
         cityDropDownList.setValue(cityName).pressEnter();
         return this;
     }
 
+    @Step("Нажать на кнопку submit")
     public RegistrationFormPage pushSubmitButton() {
         submitButton.click();
         return this;
     }
 
+    @Step("Проверка заполненной формы")
     public void checkResultSubmitting(Map<String, String> tableRowsValues) {
         modalHeader.shouldHave(text("Thanks for submitting the form"));
         checkTableValues(tableRowsValues);
     }
 
+    @Step("Проверка каждого заполненного поля")
     public void checkTableValues(Map<String, String> tableRowsValues) {
         tableRowsValues.forEach((key, value) -> {
             tableRows.findBy(text(key)).shouldHave(text(value));
