@@ -29,7 +29,7 @@ public class BaseData {
         valuesForCheckingAfterSubmitting.put("Date of Birth", "30 April,2013");
         valuesForCheckingAfterSubmitting.put("Subjects", "Chemistry, Arts");
         valuesForCheckingAfterSubmitting.put("Hobbies", "Sports, Reading, Music");
-        valuesForCheckingAfterSubmitting.put("Picture", "chil.jpg");
+//        valuesForCheckingAfterSubmitting.put("Picture", "chil.jpg");
         valuesForCheckingAfterSubmitting.put("Address", address);
         valuesForCheckingAfterSubmitting.put("State and City", state + " " + city);
         Arrays.stream(subjects).forEach(System.out::print);

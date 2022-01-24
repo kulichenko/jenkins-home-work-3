@@ -22,7 +22,6 @@ public class StudentRegistrationFormTest extends BaseTest {
                 .setBirthDate("30", "April", "2013")
                 .setSubjects(data.subjects)
                 .setHobbies(data.hobbies)
-                .uploadPicture(data.path)
                 .typeAddress(data.address)
                 .selectState(data.state)
                 .selectCity(data.city)
